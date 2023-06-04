@@ -68,7 +68,6 @@ button:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: none;
   z-index: 150;
 }
 .popup-content {
@@ -79,27 +78,6 @@ button:hover {
   border-radius: 7px;
   display: flex;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 22%);
-}
-.img-box {
-  position: relative;
-  width: 300px;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.img-box::before {
-  content: '';
-  position: absolute;
-  height: 250px;
-  width: 250px;
-  background-color: #fff;
-  border-radius: 50%;
-}
-.img-box img {
-  position: relative;
-  width: 250px;
-  z-index: 1;
 }
 .content {
   position: relative;
@@ -128,23 +106,6 @@ button:hover {
     height: auto;
   }
 
-  .img-box {
-    height: 100px;
-    width: 100px;
-    transform: translateX(100%);
-  }
-
-  .img-box img {
-    height: 100%;
-    width: 100%;
-  }
-
-  .img-box::before {
-    height: 100px;
-    width: 100px;
-    padding-top: 20px;
-  }
-
   .content {
     height: auto;
     text-align: center;
@@ -165,7 +126,6 @@ button:hover {
 
 .overlay{
   position: fixed;
-  display: none;
   width: 100%;
   height: 100%;
   top: 0;

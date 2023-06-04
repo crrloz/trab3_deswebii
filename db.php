@@ -26,28 +26,6 @@
     $sql = $conn -> prepare("SELECT * FROM planeta");
     $sql -> execute();
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $posicao = $_POST['posicao']; ?>
-        <!-- Over(s)lay -->
-        <aside class="section-overlay">
-            <div class="overlay">
-            </div>
-            <div class="popup">
-                <div class="popup-content">
-                    <div class="content">
-                        <div>
-                            <h3>Bem vindo a ASEUL</h3>
-                            <p>Você está nos visitando do Brasil. Para mudar, confira as configurações de localização do site.</p>
-                            <form method="post" action="includes/delete.inc.php">
-                                <input type="submit" value="Sim, quero deletar" name="deletar" id="btnClose">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-    <?php }
-
     $fetch = $sql -> fetchAll();
 
     foreach ($fetch as $key => $value) { ?>
@@ -57,7 +35,7 @@
                 ID: <?php echo $value['id']; ?>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <input type="hidden" name="posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Deletar" class="btnDel">
+                    <input type="submit" value="Deletar" class="btnDel" onclick="openFunct()">
                 </form>
             </div>
             <hr>
@@ -68,7 +46,31 @@
             Descrição: <?php echo $value["descri"]; ?><hr>
             <br>
         </div>
-    <?php } ?>
+    <?php }
+    
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $posicao = $_POST['posicao']; ?>
+        <!-- Over(s)lay -->
+        <aside class="section-overlay">
+            <div class="overlay">
+            </div>
+            <div class="popup">
+                <div class="popup-content">
+                    <div class="content">
+                        <div>
+                            <h3>Opa... Calma lá!</h3>
+                            <p>Você estará excluindo todo o registro do planeta (nome). Tem certeza de que deseja prosseguir?</p>
+                            <form method="post" action="includes/delete.inc.php">
+                                <input type="submit" value="Sim, quero deletar"  name="deletar">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    <?php }
+
+    ?>
 
     <a href="index.php">VLTAR PRO BGLH</a>
 </body>
