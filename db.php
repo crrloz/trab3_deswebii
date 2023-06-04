@@ -21,8 +21,8 @@
 </style>
 <body>
     <!-- Title Page -->
-    <section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/fundoteste.jpg);">
-        <h2 class="t-center f-glitten color0 fs-80">
+    <section class="section-title-page p-t-100 p-b-80 p-l-15 p-r-15">
+        <h2 class="t-center f-glitten">
             BANCO DE DADOS
         </h2>
 	</section>
@@ -37,7 +37,7 @@
 
     foreach ($fetch as $key => $value) { ?>
         <div class="t-center">
-            <hr>
+            <hr style="padding-top: 0; margin-top: 0;">
             <div class="id-column">
                 <b>ID:</b> <?php echo $value['id']; ?>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -67,7 +67,7 @@
                         <h3>Opa... Calma lá!</h3>
                         <p>Você estará excluindo todo o registro do planeta (nome). Tem certeza de que deseja prosseguir?</p>
                         <form method="post" action="includes/delete.inc.php">
-                            <input type="hidden" name="pos" value="<?php echo $value['id']; ?>">
+                            <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
                             <input type="submit" value="Sim, quero deletar"  name="deletar">
                         </form>
                     </div>
@@ -78,7 +78,9 @@
 
     ?>
 
-    <a href="index.php">VLTAR PRO BGLH</a>
+    <section class="t-center p-b-40">
+        <a href="index.php">Voltar para a página de cadastro</a>
+    </section>
 </body>
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script src="js/main.js"></script>
