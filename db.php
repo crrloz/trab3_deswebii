@@ -5,12 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- ESTILIZAÇÃO PRINCIPAL -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/util.css">
     <link rel="stylesheet" href="css/style.css">
 
     <title>Planetas Registrados</title>
 </head>
+<style>
+    .btnDel {
+        display: none;
+        position: absolute;
+	    transform: translate(80%,-90%);
+    }
+</style>
 <body>
     <?php
     require_once 'includes/dbh.inc.php';
@@ -18,14 +26,52 @@
     $sql = $conn -> prepare("SELECT * FROM planeta");
     $sql -> execute();
 
-    $fetchaluno = $sql -> fetchAll();
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $posicao = $_POST['posicao']; ?>
+        <!-- Over(s)lay -->
+        <aside class="section-overlay">
+            <div class="overlay">
+            </div>
+            <div class="popup">
+                <div class="popup-content">
+                    <div class="content">
+                        <div>
+                            <h3>Bem vindo a ASEUL</h3>
+                            <p>Você está nos visitando do Brasil. Para mudar, confira as configurações de localização do site.</p>
+                            <form method="post" action="includes/delete.inc.php">
+                                <input type="submit" value="Sim, quero deletar" name="deletar" id="btnClose">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    <?php }
 
-    foreach ($fetchaluno as $key => $value){ ?>
-    <div class="t-center"> <?php
-        echo '<br><hr>';
-        echo 'ID: '. $value['id']. '<hr>Nome: '. $value['nome']. '<hr>Diâmetro: '. $value['diametro']. '<hr>Massa: '. $value["massa"]. '<hr>Gravidade: '. $value["gravidade"]. '<hr>Descrição: '. $value["descri"];
-        echo '<hr><br>';
-    ?> </div> <?php
-    } ?>
+    $fetch = $sql -> fetchAll();
+
+    foreach ($fetch as $key => $value) { ?>
+        <div class="t-center">
+            <hr>
+            <div class="id-column">
+                ID: <?php echo $value['id']; ?>
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <input type="hidden" name="posicao" value="<?php echo $value['id']; ?>">
+                    <input type="submit" value="Deletar" class="btnDel">
+                </form>
+            </div>
+            <hr>
+            Nome: <?php echo $value['nome']; ?><hr>
+            Diâmetro: <?php echo $value['diametro']; ?>km<hr>
+            Massa: <?php echo $value["massa"]; ?> toneladas<hr>
+            Gravidade: <?php echo $value["gravidade"]; ?>m/s²<hr>
+            Descrição: <?php echo $value["descri"]; ?><hr>
+            <br>
+        </div>
+    <?php } ?>
+
+    <a href="index.php">VLTAR PRO BGLH</a>
 </body>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="js/main.js"></script>
 </html>

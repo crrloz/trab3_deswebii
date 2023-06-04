@@ -15,11 +15,11 @@ function emptyInput($nome, $descri){
 
 function invalidDouble($diametro, $massa, $gravidade){
     $result;
-    if(!is_double($diametro) || !is_double($massa) || !is_double($gravidade)){
-        $result = true;
+    if(is_numeric($diametro) && is_numeric($massa) && is_numeric($gravidade)){
+        $result = false;
     }
     else {
-        $result = false;
+        $result = true;
     }
     return $result;
 }
