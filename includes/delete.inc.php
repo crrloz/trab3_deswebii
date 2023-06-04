@@ -1,9 +1,10 @@
 <?php
 require_once 'dbh.inc.php';
-$posicao = $_POST['posicao'];
+$pos = $_POST['pos'];
 
-$sql = $conn->prepare("DELETE FROM planeta WHERE id = ?");
-$sql->execute([$posicao]);
+$sql = $conn->prepare("DELETE FROM planeta WHERE id = :pos");
+$sql->bindParam(':pos', $pos);
+$sql->execute();
 
 header("location: ../db.php");
 exit();

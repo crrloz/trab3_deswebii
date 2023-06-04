@@ -23,11 +23,9 @@
             <input type="text" name="descri" placeholder="Descrição" class="input-field">
             <br><br>
 
-            <input type="submit" name="submit" value="Inserir">
-
             <?php
-            if (isset($_POST['submit'])){
-                echo "Dados inseridos com sucesso!";
+            if (isset($_GET["error"]) && $_GET["error"] == "none"){
+                echo "<p>Dados inseridos com sucesso! Conferir o <a href='db.php'>Banco de Dados</a></p>";
             }
             if(isset($_GET["error"]) && $_GET["error"] == "invaliddouble"){
                 echo "<p>Preencha os campos Diâmetro, Massa e Gravidade com valores numéricos apenas.</p>";
@@ -35,6 +33,8 @@
                 echo "<p>Preencha pelo menos os campos Nome e Descrição.</p>";
             }
             ?>
+
+            <input type="submit" name="submit" value="Inserir">
         </form>
     </section>
 </body>

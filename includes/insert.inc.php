@@ -16,6 +16,6 @@ if (isset($_POST['submit'])){
     $sql = $conn -> prepare("insert into planeta (nome, diametro, massa, gravidade, descri) values (?,?,?,?,?)");
     $sql -> execute(array($_POST["nome"], $_POST["diametro"], $_POST["massa"], $_POST["gravidade"], $_POST["descri"]));
 
-    header("location: ../db.php");
+    header("location: ../index.php?error=none");
     exit();
 }

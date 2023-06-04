@@ -20,6 +20,13 @@
     }
 </style>
 <body>
+    <!-- Title Page -->
+    <section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/fundoteste.jpg);">
+        <h2 class="t-center f-glitten color0 fs-80">
+            BANCO DE DADOS
+        </h2>
+	</section>
+
     <?php
     require_once 'includes/dbh.inc.php';
 
@@ -32,18 +39,18 @@
         <div class="t-center">
             <hr>
             <div class="id-column">
-                ID: <?php echo $value['id']; ?>
+                <b>ID:</b> <?php echo $value['id']; ?>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <input type="hidden" name="posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Deletar" class="btnDel" onclick="openFunct()">
+                    <input type="submit" value="Deletar" class="btnDel">
                 </form>
             </div>
             <hr>
-            Nome: <?php echo $value['nome']; ?><hr>
-            Diâmetro: <?php echo $value['diametro']; ?>km<hr>
-            Massa: <?php echo $value["massa"]; ?> toneladas<hr>
-            Gravidade: <?php echo $value["gravidade"]; ?>m/s²<hr>
-            Descrição: <?php echo $value["descri"]; ?><hr>
+            <b>Nome:</b> <?php echo $value['nome']; ?><hr>
+            <b>Diâmetro:</b> <?php echo $value['diametro']; ?>km<hr>
+            <b>Massa:</b> <?php echo $value["massa"]; ?> tonelada(s)<hr>
+            <b>Gravidade:</b> <?php echo $value["gravidade"]; ?>m/s²<hr>
+            <b>Descrição:</b> <?php echo $value["descri"]; ?><hr>
             <br>
         </div>
     <?php }
@@ -56,14 +63,13 @@
             </div>
             <div class="popup">
                 <div class="popup-content">
-                    <div class="content">
-                        <div>
-                            <h3>Opa... Calma lá!</h3>
-                            <p>Você estará excluindo todo o registro do planeta (nome). Tem certeza de que deseja prosseguir?</p>
-                            <form method="post" action="includes/delete.inc.php">
-                                <input type="submit" value="Sim, quero deletar"  name="deletar">
-                            </form>
-                        </div>
+                    <div>
+                        <h3>Opa... Calma lá!</h3>
+                        <p>Você estará excluindo todo o registro do planeta (nome). Tem certeza de que deseja prosseguir?</p>
+                        <form method="post" action="includes/delete.inc.php">
+                            <input type="hidden" name="pos" value="<?php echo $value['id']; ?>">
+                            <input type="submit" value="Sim, quero deletar"  name="deletar">
+                        </form>
                     </div>
                 </div>
             </div>
