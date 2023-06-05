@@ -49,6 +49,10 @@ body, html {
 
 /* ------------------------------------ */
 
+a, a:hover{
+  color: #1d531d;
+}
+
 button, input[type="submit"] {
 	outline: none !important;
 	border: none;
@@ -131,4 +135,16 @@ input[type="text"]{
   bottom: 0;
   background-color: rgba(0,0,0,0.7);
   z-index: 100;
+}
+
+/* ------------------------------------ */
+
+/*[TITLE PAGE]*/
+
+.bg-title-page {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-size: cover;
+  color: white;
 }

@@ -1,3 +1,12 @@
+<?php
+require_once 'includes/dbh.inc.php';
+
+$sql = $conn -> prepare("SELECT * FROM planeta");
+$sql -> execute();
+
+$fetch = $sql -> fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,20 +30,13 @@
 </style>
 <body>
     <!-- Title Page -->
-    <section class="section-title-page p-t-100 p-b-80 p-l-15 p-r-15">
+    <section class="section-title-page bg-title-page p-t-100 p-b-80 p-l-15 p-r-15" style="background-image: url(img/bg2.jpg)">
         <h2 class="t-center f-glitten">
             BANCO DE DADOS
         </h2>
 	</section>
 
     <?php
-    require_once 'includes/dbh.inc.php';
-
-    $sql = $conn -> prepare("SELECT * FROM planeta");
-    $sql -> execute();
-
-    $fetch = $sql -> fetchAll();
-
     foreach ($fetch as $key => $value) { ?>
         <div class="t-center">
             <hr style="padding-top: 0; margin-top: 0;">
@@ -56,7 +58,7 @@
     <?php }
     
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $posicao = $_POST['posicao']; ?>
+        $posicao = $_POST['posicao'];?>
         <!-- Over(s)lay -->
         <aside class="section-overlay">
             <div class="overlay">
@@ -65,7 +67,7 @@
                 <div class="popup-content">
                     <div>
                         <h3>Opa... Calma lá!</h3>
-                        <p>Você estará excluindo todo o registro do planeta (nome). Tem certeza de que deseja prosseguir?</p>
+                        <p>Você estará excluindo todo o registro do planeta selecionado. Tem certeza de que deseja prosseguir?</p>
                         <form method="post" action="includes/delete.inc.php">
                             <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
                             <input type="submit" value="Sim, quero deletar"  name="deletar">
