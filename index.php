@@ -26,9 +26,9 @@
         <p>Insira abaixo as informações necessárias para o cadastro do planeta descoberto</p>
         <form action="includes/insert.inc.php" method="post">
             <input type="text" name="nome" placeholder="Nome" class="input-field">
-            <input type="text" name="diametro" placeholder="Diâmetro" class="input-field">
-            <input type="text" name="massa" placeholder="Massa" class="input-field">
-            <input type="text" name="gravidade" placeholder="Gravidade" class="input-field">
+            <input type="number" name="diametro" placeholder="Diâmetro" class="input-field">
+            <input type="number" name="massa" placeholder="Massa" class="input-field">
+            <input type="number" name="gravidade" placeholder="Gravidade" class="input-field">
             <input type="text" name="descri" placeholder="Descrição" class="input-field">
             <br><br>
 

@@ -22,7 +22,7 @@ $fetch = $sql -> fetchAll();
     <title>Planetas Registrados</title>
 </head>
 <style>
-    .btnDel {
+    .btnDel, .btnAlt {
         display: none;
         position: absolute;
 	    transform: translate(80%,-90%);
@@ -48,17 +48,35 @@ $fetch = $sql -> fetchAll();
                 </form>
             </div>
             <hr>
-            <b>Nome:</b> <?php echo $value['nome']; ?><hr>
-            <b>Diâmetro:</b> <?php echo $value['diametro']; ?>km<hr>
+
+            <div class="attribute-column">
+                <b>Nome:</b> <?php echo $value['nome']; ?>
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <input type="hidden" name="nome_posicao" value="<?php echo $value['id']; ?>">
+                    <input type="submit" value="Alterar" class="btnAlt">
+                </form>
+            </div>
+            <hr>
+
+            <div class="attribute-column">
+                <b>Diâmetro:</b> <?php echo $value['diametro']; ?>km
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <input type="hidden" name="diametro_posicao" value="<?php echo $value['id']; ?>">
+                    <input type="submit" value="Alterar" class="btnAlt">
+                </form>
+            </div>
+            <hr>
+
             <b>Massa:</b> <?php echo $value["massa"]; ?> tonelada(s)<hr>
+
             <b>Gravidade:</b> <?php echo $value["gravidade"]; ?>m/s²<hr>
+
             <b>Descrição:</b> <?php echo $value["descri"]; ?><hr>
             <br>
         </div>
     <?php }
     
-    if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $posicao = $_POST['posicao'];?>
+    if($_SERVER['REQUEST_METHOD'] === 'POST') { ?>
         <!-- Over(s)lay -->
         <aside class="section-overlay">
             <div class="overlay">
@@ -66,12 +84,33 @@ $fetch = $sql -> fetchAll();
             <div class="popup">
                 <div class="popup-content">
                     <div>
+                    <?php if(isset($_POST['posicao'])){ 
+                        $posicao = $_POST['posicao'];?>
                         <h3>Opa... Calma lá!</h3>
                         <p>Você estará excluindo todo o registro do planeta selecionado. Tem certeza de que deseja prosseguir?</p>
                         <form method="post" action="includes/delete.inc.php">
                             <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
-                            <input type="submit" value="Sim, quero deletar"  name="deletar">
+                            <input type="submit" value="Sim, quero deletar" name="deletar">
                         </form>
+                    <?php } else if (isset($_POST['nome_posicao'])){ 
+                        $posicao = $_POST['nome_posicao'];?>
+                        <h3>Deseja alterar o atributo NOME?</h3>
+                        <p>Digite abaixo um novo valor para o atributo "nome".</p>
+                        <form method="post" action="includes/alter.inc.php">
+                            <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
+                            <input type="text" name="nome" placeholder="Digite o nome...">
+                            <input type="submit" value="Alterar">
+                        </form>
+                    <?php } else if (isset($_POST['diametro_posicao'])){
+                        $posicao = $_POST['diametro_posicao'];?>
+                        <h3>Deseja alterar o atributo DIÂMETRO?</h3>
+                        <p>Digite abaixo um novo valor para o atributo.</p>
+                        <form method="post" action="includes/alter.inc.php">
+                            <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
+                            <input type="number" name="diametro" placeholder="Digite o diâmetro...">
+                            <input type="submit" value="Alterar">
+                        </form>
+                    <?php }?>
                     </div>
                 </div>
             </div>

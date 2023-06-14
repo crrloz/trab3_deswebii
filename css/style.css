@@ -65,7 +65,7 @@ button:hover, input[type="submit"]:hover {
 
 /* ------------------------------------ */
 
-input[type="text"]{
+input[type="text"], input[type="number"]{
   padding: 5px 2.5px;
 }
 
