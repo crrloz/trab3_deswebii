@@ -21,3 +21,5 @@ if (isset($_POST['submit'])){
 }
 
 // CREATE TABLE planeta(nome VARCHAR(128) NOT NULL, diametro DOUBLE, massa DOUBLE, gravidade DOUBLE, tipo VARCHAR(7), galaxia VARCHAR(30) NOT NULL, descri TEXT NOT NULL, id INT PRIMARY KEY AUTO_INCREMENT);
+
+// CREATE TABLE satelite (id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(128) NOT NULL, diametro DOUBLE, massa DOUBLE, artificial BOOLEAN, tipo VARCHAR(10), planeta_id INT, FOREIGN KEY (planeta_id) REFERENCES planeta(id));
