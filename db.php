@@ -25,7 +25,15 @@ $fetch = $sql -> fetchAll();
     .btnDel, .btnAlt {
         display: none;
         position: absolute;
-	    transform: translate(80%,-90%);
+	    transform: translate(140%,-90%);
+    }
+
+    a, a:hover{
+        color: #000000;
+    }
+
+    input[type="text"], input[type="number"], select{
+        padding: 5px 2.5px;
     }
 </style>
 <body>
@@ -49,29 +57,70 @@ $fetch = $sql -> fetchAll();
             </div>
             <hr>
 
-            <div class="attribute-column">
+            <div class="id-column">
                 <b>Nome:</b> <?php echo $value['nome']; ?>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <input type="hidden" name="nome_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Alterar" class="btnAlt">
+                    <input type="submit" value="Alterar" class="btnDel">
                 </form>
             </div>
             <hr>
 
-            <div class="attribute-column">
+            <div class="id-column">
                 <b>Diâmetro:</b> <?php echo $value['diametro']; ?>km
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <input type="hidden" name="diametro_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Alterar" class="btnAlt">
+                    <input type="submit" value="Alterar" class="btnDel">
                 </form>
             </div>
             <hr>
 
-            <b>Massa:</b> <?php echo $value["massa"]; ?> tonelada(s)<hr>
+            <div class="id-column">
+                <b>Massa:</b> <?php echo $value["massa"]; ?> tonelada(s)
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <input type="hidden" name="massa_posicao" value="<?php echo $value['id']; ?>">
+                    <input type="submit" value="Alterar" class="btnDel">
+                </form>
+            </div>
+            <hr>
+            
+            <div class="id-column">
+                <b>Gravidade:</b> <?php echo $value["gravidade"]; ?>m/s²
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <input type="hidden" name="gravidade_posicao" value="<?php echo $value['id']; ?>">
+                    <input type="submit" value="Alterar" class="btnDel">
+                </form>
+            </div>
+            <hr>
 
-            <b>Gravidade:</b> <?php echo $value["gravidade"]; ?>m/s²<hr>
+            <div class="id-column">
+                <b>Tipo:</b> <?php echo $value["tipo"]; ?>
+                <form method="post" action="includes/alter.inc.php">
+                    <input type="hidden" name="tipo_posicao" value="<?php echo $value['id']; ?>">
+                    <input type="hidden" name="tipo" value="<?php echo $value['tipo']; ?>">
+                    <input type="submit" value="Alterar" class="btnDel">
+                </form>
+            </div>
+            <hr>
 
-            <b>Descrição:</b> <?php echo $value["descri"]; ?><hr>
+            <div class="id-column">
+                <b>Galáxia:</b> <?php echo $value["galaxia"]; ?>
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <input type="hidden" name="galaxia_posicao" value="<?php echo $value['id']; ?>">
+                    <input type="submit" value="Alterar" class="btnDel">
+                </form>
+            </div>
+            <hr>
+
+            <div class="id-column">
+                <b>Descrição:</b> <?php echo $value["descri"]; ?>
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <input type="hidden" name="descri_posicao" value="<?php echo $value['id']; ?>">
+                    <input type="submit" value="Alterar" class="btnDel">
+                </form>
+            </div>
+            <hr>
+
             <br>
         </div>
     <?php }
@@ -94,7 +143,7 @@ $fetch = $sql -> fetchAll();
                         </form>
                     <?php } else if (isset($_POST['nome_posicao'])){ 
                         $posicao = $_POST['nome_posicao'];?>
-                        <h3>Deseja alterar o atributo NOME?</h3>
+                        <h3>Deseja alterar o atributo <b>NOME</b>?</h3>
                         <p>Digite abaixo um novo valor para o atributo "nome".</p>
                         <form method="post" action="includes/alter.inc.php">
                             <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
@@ -103,14 +152,54 @@ $fetch = $sql -> fetchAll();
                         </form>
                     <?php } else if (isset($_POST['diametro_posicao'])){
                         $posicao = $_POST['diametro_posicao'];?>
-                        <h3>Deseja alterar o atributo DIÂMETRO?</h3>
+                        <h3>Deseja alterar o atributo <b>DIÂMETRO?</b></h3>
                         <p>Digite abaixo um novo valor para o atributo.</p>
                         <form method="post" action="includes/alter.inc.php">
                             <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
                             <input type="number" name="diametro" placeholder="Digite o diâmetro...">
                             <input type="submit" value="Alterar">
                         </form>
-                    <?php }?>
+                    <?php } else if (isset($_POST['massa_posicao'])){
+                        $posicao = $_POST['massa_posicao'];?>
+                        <h3>Deseja alterar o atributo <b>MASSA</b>?</h3>
+                        <p>Digite abaixo um novo valor para o atributo.</p>
+                        <form method="post" action="includes/alter.inc.php">
+                            <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
+                            <input type="number" name="massa" placeholder="Digite a massa...">
+                            <input type="submit" value="Alterar">
+                        </form>
+                        <?php } else if (isset($_POST['gravidade_posicao'])){
+                        $posicao = $_POST['gravidade_posicao'];?>
+                        <h3>Deseja alterar o atributo <b>GRAVIDADE</b>?</h3>
+                        <p>Digite abaixo um novo valor para o atributo.</p>
+                        <form method="post" action="includes/alter.inc.php">
+                            <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
+                            <input type="number" name="gravidade" placeholder="Digite a gravidade...">
+                            <input type="submit" value="Alterar">
+                        </form>
+                        <?php } else if (isset($_POST['galaxia_posicao'])){
+                        $posicao = $_POST['galaxia_posicao'];?>
+                        <h3>Deseja alterar o atributo <b>GALÁXIA?</b></h3>
+                        <p>Selecione abaixo a galáxia para o planeta.</p>
+                        <form method="post" action="includes/alter.inc.php">
+                            <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
+                            <select name="galaxia">
+                                <option value="Via Láctea">Via Láctea</option>
+                                <option value="Andrômeda">Andrômeda</option>
+                                <option value="Grande Nuvem de Magalhães">Grande Nuvem de Magalhães</option>
+                            </select>
+                            <input type="submit" value="Alterar">
+                        </form>
+                        <?php } else if (isset($_POST['descri_posicao'])){
+                        $posicao = $_POST['descri_posicao'];?>
+                        <h3>Deseja alterar o atributo <b>DESCRIÇÃO</b>?</h3>
+                        <p>Digite abaixo uma nova descrição.</p>
+                        <form method="post" action="includes/alter.inc.php">
+                            <input type="hidden" name="pos" value="<?php echo $posicao; ?>">
+                            <input type="text" name="descri" placeholder="Digite a descrição...">
+                            <input type="submit" value="Alterar">
+                        </form>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

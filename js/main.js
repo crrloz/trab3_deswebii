@@ -4,12 +4,6 @@ $(document).ready(function() {
     }, function() {
         $(this).find('.btnDel').hide();
     });
-
-    $('.attribute-column').hover(function() {
-        $(this).find('.btnAlt').show();
-    }, function() {
-        $(this).find('.btnAlt').hide();
-    });
     
 
      /*[ ]

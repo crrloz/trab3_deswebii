@@ -11,6 +11,15 @@
 
     <title>PLANETAS.... | Cadastro</title>
 </head>
+<style>
+    input[type="text"], input[type="number"], select{
+        padding: 5px 2.5px;
+    }
+
+    .color0, .color0:hover {
+        color: #1d531d;
+    }
+</style>
 <body>
     <!-- Title Page -->
     <section class="section-title-page bg-title-page p-t-100 p-b-80 p-l-15 p-r-15 m-b-50" style="background-image: url(img/bg1.jpg)">
@@ -32,16 +41,45 @@
             <input type="text" name="descri" placeholder="Descrição" class="input-field">
             <br><br>
 
+
+            <h5>SUA GALÁXIA É ...?</h5>
+            <select name="galaxia">
+                <option value="Via Láctea">Via Láctea</option>
+                <option value="Andrômeda">Andrômeda</option>
+                <option value="Grande Nuvem de Magalhães">Grande Nuvem de Magalhães</option>
+            </select>
+            <br><br>
+
+
+            <h5>O PLANETA É ...?</h5>
+            <input type="radio" name="tipo" value="Gasoso">
+            <label>Gasoso</label>
+
+            <input type="radio" name="tipo" value="Rochoso">
+            <label>Rochoso</label>
+            <br><br>
+
+
+            <h5>O PLANETA POSSUI ...?</h5>
+            <input type="checkbox" name="anel">
+            <label for="anel">Anéis</label>
+
+            <input type="checkbox" name="atmosfera">
+            <label for="atmosfera">Atmosfera</label>
+
+            <input type="checkbox" name="lua">
+            <label for="lua">Lua</label>
+            <br><br>
+
             <?php
             if (isset($_GET["error"]) && $_GET["error"] == "none"){
-                echo "<p>Dados inseridos com sucesso! Conferir o <a href='db.php'>Banco de Dados</a></p>";
-            }
-            else if(isset($_GET["error"]) && $_GET["error"] == "invaliddouble"){
+                echo "<p>Dados inseridos com sucesso! Confira o <a href='db.php'>Banco de Dados</a></p>";
+            } else if(isset($_GET["error"]) && $_GET["error"] == "invaliddouble"){
                 echo "<p>Preencha os campos Diâmetro, Massa e Gravidade com valores numéricos apenas.</p>";
             } else if(isset($_GET["error"]) && $_GET["error"] == "emptyinput"){
                 echo "<p>Preencha pelo menos os campos Nome e Descrição.</p>";
             } else {
-                echo "<p>... ou confira o <a href='db.php'>Banco de Dados</a></p>";
+                echo "<p>... Confira também o <a href='db.php' class='color0'>Banco de Dados</a></p>";
             }
             ?>
 
