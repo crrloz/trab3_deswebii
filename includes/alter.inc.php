@@ -1,10 +1,7 @@
 <?php
 require_once 'dbh.inc.php';
 
-if(!isset($_POST)){
-    header("location: ../db.php");
-    exit();
-} else if($_POST['nome']){
+if($_POST['nome']){
     $id = $_POST['pos'];
     $nome = $_POST['nome'];
 
@@ -58,5 +55,6 @@ if(!isset($_POST)){
     $sql -> execute(array($descri, $id));
 
 }
+
 header("location: ../db.php");
 exit();

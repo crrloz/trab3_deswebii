@@ -35,8 +35,33 @@ $fetch = $sql -> fetchAll();
     input[type="text"], input[type="number"], select{
         padding: 5px 2.5px;
     }
+
+    .wrap-header {
+        width: 100%;
+        padding: 10px 0;
+        background-color: white;
+    }
+
+    .search-input {
+        text-align: center;
+        width: 30%;
+        outline: pink
+    }
 </style>
 <body>
+    <!-- Navbar -->
+    <header>
+        <div class="wrap-header t-center">
+            <div class="wrap-form-search">
+                <form method="get">
+                    <input type="number" placeholder="Procure por um ID" name="search" class="search-input">
+                    <input type="submit" value="IR">
+                </form>
+            </div>
+        </div>
+    </header>
+
+
     <!-- Title Page -->
     <section class="section-title-page bg-title-page p-t-100 p-b-80 p-l-15 p-r-15" style="background-image: url(img/bg2.jpg)">
         <h2 class="t-center f-glitten">
@@ -45,85 +70,36 @@ $fetch = $sql -> fetchAll();
 	</section>
 
     <?php
-    foreach ($fetch as $key => $value) { ?>
-        <div class="t-center">
-            <hr style="padding-top: 0; margin-top: 0;">
-            <div class="id-column">
-                <b>ID:</b> <?php echo $value['id']; ?>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <input type="hidden" name="posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Deletar" class="btnDel">
-                </form>
-            </div>
-            <hr>
+    require_once 'includes/class.inc.php';
 
-            <div class="id-column">
-                <b>Nome:</b> <?php echo $value['nome']; ?>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <input type="hidden" name="nome_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Alterar" class="btnDel">
-                </form>
-            </div>
-            <hr>
+    if (isset($_GET["search"])){
+        $id = $_GET["search"];
+        
+        $sql = "SELECT * FROM planeta WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        
+        $rowCount = $stmt->rowCount();
 
-            <div class="id-column">
-                <b>Diâmetro:</b> <?php echo $value['diametro']; ?>km
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <input type="hidden" name="diametro_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Alterar" class="btnDel">
-                </form>
-            </div>
-            <hr>
+        if ($rowCount > 0) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                foreach ($row as $column => $value) {
+                    echo $column . ": " . $value . "<br>";
+                }
+            }
+        } else {
+            echo "Nenhuma linha encontrada para o ID especificado.";
+        }
+    } else {
 
-            <div class="id-column">
-                <b>Massa:</b> <?php echo $value["massa"]; ?> tonelada(s)
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <input type="hidden" name="massa_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Alterar" class="btnDel">
-                </form>
-            </div>
-            <hr>
-            
-            <div class="id-column">
-                <b>Gravidade:</b> <?php echo $value["gravidade"]; ?>m/s²
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <input type="hidden" name="gravidade_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Alterar" class="btnDel">
-                </form>
-            </div>
-            <hr>
+        foreach ($fetch as $key => $value) {
+            $planeta = new Planeta($value['id'], $value['nome'], $value['diametro'], $value['massa'], $value['gravidade'], $value['tipo'], $value['galaxia'], $value['descri']);
 
-            <div class="id-column">
-                <b>Tipo:</b> <?php echo $value["tipo"]; ?>
-                <form method="post" action="includes/alter.inc.php">
-                    <input type="hidden" name="tipo_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="hidden" name="tipo" value="<?php echo $value['tipo']; ?>">
-                    <input type="submit" value="Alterar" class="btnDel">
-                </form>
-            </div>
-            <hr>
+            $planeta -> Mostrar();
+        }
 
-            <div class="id-column">
-                <b>Galáxia:</b> <?php echo $value["galaxia"]; ?>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <input type="hidden" name="galaxia_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Alterar" class="btnDel">
-                </form>
-            </div>
-            <hr>
-
-            <div class="id-column">
-                <b>Descrição:</b> <?php echo $value["descri"]; ?>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <input type="hidden" name="descri_posicao" value="<?php echo $value['id']; ?>">
-                    <input type="submit" value="Alterar" class="btnDel">
-                </form>
-            </div>
-            <hr>
-
-            <br>
-        </div>
-    <?php }
+    }
     
     if($_SERVER['REQUEST_METHOD'] === 'POST') { ?>
         <!-- Over(s)lay -->

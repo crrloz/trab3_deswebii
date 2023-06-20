@@ -18,6 +18,9 @@ if (isset($_POST['submit'])){
 
     header("location: ../index.php?error=none");
     exit();
+} else {
+    header("location: ../index.php");
+    exit();
 }
 
 // CREATE TABLE planeta(nome VARCHAR(128) NOT NULL, diametro DOUBLE, massa DOUBLE, gravidade DOUBLE, tipo VARCHAR(7), galaxia VARCHAR(30) NOT NULL, descri TEXT NOT NULL, id INT PRIMARY KEY AUTO_INCREMENT);
